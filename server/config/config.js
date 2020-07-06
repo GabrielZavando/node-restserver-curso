@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'dev'){
   urlDB = 'mongodb://localhost:27017/cafe'
 }else{
   // Base de datos Mongo Atlas
-  urlDB = 'mongodb+srv://gabrielzavando:fl2LxhVh1nkuJeZG@cluster0-1cudd.gcp.mongodb.net/cafe'
+  urlDB = process.env.MONGO_URI
 }
 
 // Creamos URLDB como parte de nuestro process.env

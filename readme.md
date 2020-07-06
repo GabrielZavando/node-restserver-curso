@@ -330,4 +330,13 @@ Primero añadimos que sea de cualquier ip, luego lo editaremos
 9° Instalamos (si no lo tenemos) MongoDB Compass y lo abrimos
 10° Para conectarnos MongoDB nos da una url que usaremos en MongoDB Compass. Necesitaremos el nombre de usuario de la base de datos y el la contraseña de dicho usuario + el nombre de la base de datos a la que nos queremos conectar. Eso es todo
 
-URL De MongoDB Atlas = mongodb+srv://gabrielzavando:fl2LxhVh1nkuJeZG@cluster0-1cudd.gcp.mongodb.net/test
+## Variables de entorno personalizadas en Heroku
+
+En la raíz del proyecto, lanzamos por consola el comando
+
+heroku config // Muestra variables de entorno
+heroku config:set nombre="Gabriel" // crea nombre: Gabriel como variabel de entorno
+
+heroku config:get nombre // Para obtener el valor de la variable de entorno nombre
+
+heroku config:unset nombre // Para borrar nombre de las variables de entorno
