@@ -2,6 +2,7 @@
 require('./config/config.js')
 
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const bodyParser = require('body-parser')
 
@@ -10,32 +11,18 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Parse application/json
 app.use(bodyParser.json())
 
-app.get('/usuario', (req, res) => {
-  res.json('get Usuario')
-})
+// Importamos las rutas
+app.use(require('./routes/usuario'))
 
-app.post('/usuario', (req, res) => {
-  let body = req.body
+// Seteamos 'useFindAndModify', false para poder usar algunos métodos, entre ellos findByIdAndRemove()
+mongoose.set('useFindAndModify', false)
 
-  if (body.nombre === undefined || body.nombre === ""){
-    res.status(400).json({
-      ok: false,
-      mensaje: 'El nombre es necesario'
-    })
-  }else{
-    res.json(body)
-  }
-})
+// Conexión a base de datos
+// Aún si no hemos creado la base de datos cafe, se realiza la conexión y se crea cuando insertamos datos
+mongoose.connect(process.env.URLDB, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}, (err, res) => {
+  if (err) throw err
 
-app.put('/usuario/:id', (req, res) => {
-  let id = req.params.id
-  res.json({
-    id
-  })
-})
-
-app.delete('/usuario', (req, res) => {
-  res.json('delete Usuario')
+  console.log('Base de datos online')
 })
 
 app.listen(process.env.PORT, () => {

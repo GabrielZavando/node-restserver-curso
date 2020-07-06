@@ -230,3 +230,104 @@ res.status(200).json({
   ok: false,
   mensaje: 'El nombre es necesario'
 })
+
+## Mongoose
+
+Paquete de terceros para crear esquemas de bases de datos y conexión a base de datos mongodb
+
+npm i mongoose
+
+mongoose tiene el metodo connect() que recibe un string con la url + nombre de la base de datos y una funcion callback
+
+## Modelos
+
+Un modelo es un objeto de mongoose sobre el cual se trabajan los datos de, por ejemplo, un Usuario. En ese objeto tenemos un modelo de la colección de Usuario (los datos de cada usuario)
+
+## Mongoose unique validator
+
+Es un paquete externo que nos ayuda a validar si existe o no un campo x con un valor x en una base de datos x.
+
+## Bcrypt
+
+npm i bcrypt
+
+Bcrypt es un paquete externo que nos ayuda en la encriptación de contraseñas
+
+bcrypt tiene un metodo llamado hashSync() que nos devuele, de manetra sincrona, un hash con el resultado de los valores que le pasemos como parametro.
+Recibe, por ejemplo, la contraseña y luego las veces que encripta dicha contraseña
+
+## Underscore
+
+npm i underscore
+
+Es un paquete externo que añade funcionalidades a js
+
+Dentro de las cientos de funciones que extiende, existe una para trabajar con objetos que se llama pick
+
+pick() regresa una copia del objeto filtrando sólo los valores que quiero
+
+## Paginacion
+
+La request (petición) tiene dentro del objeto req (o como sea que lo recibamos en nuestra función, aunque por convención se usa req), un objeto query
+
+Podemos construir desde el front una petición que añada en el objeto query una clave llamada desde (por ejemplo) con el valor X.
+Asi mísmo, podemos añadir una clave hasta (por ejemplo) con otro valor x.
+
+Para capturar dichos valores y usarlos en las busquedas a la base de datos
+
+Ahora, en la construcción de la petición por url, se escribe
+
+/usuarios?desde=10
+
+En donde usuarios, es la url de la petición
+?, quiere decir, parámetro opcional
+desde, es el nombre del parametro
+=, para asignarle un valor al parametro
+10, valor del parametro desde.
+
+Para añadir otro parámetro por url (sólo puede ir un parámetro opcional y va al principio)
+
+/usuarios?desde=10&limite=10
+
+Otro dato importante de envíar para ser usado en frontend, es la cantidad total de registros de una coleccion
+
+## Filtrando los campos de los resultados de un GET
+
+Es tan simple como pasar, como segundo parametro en la función, find() un string con las claves que queremos enviar en nuetra res.
+
+Por ejemplo find({}, 'nombre email') 
+
+Y nos devolverá el id (que siempre lo envía y es bueno que así sea), el nomre y el email
+
+## Borrando un documento de la base de datos
+
+Podemos pasar el id tanto por el body de la petición como por parametro en la url
+
+Por url, eje
+
+/usuario/kahahaghansvg // id
+
+## Cambiar estado (en lugar de borrar)
+
+Lo ideal es nunca borrar datos de una base de datos, entonces, para evitar hacer eso, se crea en el modelo un campo estado y ese campo almacena un boolean
+
+## Mongo db en la nube
+
+MongoDB Atlas ex, MLab
+
+Ya tengo cuenta en MongoDB Atlas
+1 Cluster gratuito con 512megas
+
+1° Creamos un nuevo cluster
+2° Seleccionamos AWS o GCP
+3° Seleccionamos lugar de almacenamiento (Sao Paulo) que tenga opción gratuita y esté cerca de donde estamos
+4° Añadimos en network access las ip que podrán hacer peticiones.
+Primero añadimos que sea de cualquier ip, luego lo editaremos
+5° Vamos Database Access y creamos un usuario de base de datos con todos los permisos
+6° Vamos a la pestaña cluster y luego pinchamos en collections
+7° Luego creamos nuestra propia base de datos clickeando en Add my own data
+8° Estando en la pestaña cluster, hacemos click en connect y seleccionamos conneect using MongoDB Compass
+9° Instalamos (si no lo tenemos) MongoDB Compass y lo abrimos
+10° Para conectarnos MongoDB nos da una url que usaremos en MongoDB Compass. Necesitaremos el nombre de usuario de la base de datos y el la contraseña de dicho usuario + el nombre de la base de datos a la que nos queremos conectar. Eso es todo
+
+URL De MongoDB Atlas = mongodb+srv://gabrielzavando:fl2LxhVh1nkuJeZG@cluster0-1cudd.gcp.mongodb.net/test
