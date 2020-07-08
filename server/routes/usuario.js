@@ -6,9 +6,11 @@ const bcrypt = require('bcrypt')
 const _ = require('underscore')
 // Importamos el modelo
 const Usuario = require('../models/usuario')
+// Importamos middlewares de autenticacion
+const {verificaToken, verificaAdminRole} = require('../middlewares/autenticacion')
 
 // DEvuelve lista de usuarios activos páginado
-app.get('/usuarios', (req, res) => {
+app.get('/usuarios', verificaToken, (req, res) => {
   // Capturamos el valor de desde, si no existe, asumimos que es cero
   let desde = req.query.desde || 0
   // Pasamos desde de string a número
@@ -54,7 +56,7 @@ app.get('/usuarios', (req, res) => {
 })
 
 // Para crear un usuario
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificaToken, verificaAdminRole], (req, res) => {
   let body = req.body
 
   // Creamos una instancia del modelo Usuario y le asignamos los valores que llegán por post en el body
@@ -85,7 +87,7 @@ app.post('/usuario', (req, res) => {
 })
 
 // Para editar un usuario
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
   let id = req.params.id
   // Pasamos por pick el objeto y un array con todos los campos que si se pueden actualizar
   let body = _.pick(req.body, ['nombre','email','img','role','estado'])
@@ -109,7 +111,7 @@ app.put('/usuario/:id', (req, res) => {
   })
 })
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
   let id = req.params.id
 
   // Para borrarlo de la base de datos

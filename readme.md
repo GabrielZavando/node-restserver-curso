@@ -335,8 +335,38 @@ Primero añadimos que sea de cualquier ip, luego lo editaremos
 En la raíz del proyecto, lanzamos por consola el comando
 
 heroku config // Muestra variables de entorno
-heroku config:set nombre="Gabriel" // crea nombre: Gabriel como variabel de entorno
+heroku config:set nombre="Gabriel" // crea nombre: Gabriel como variable de entorno
 
 heroku config:get nombre // Para obtener el valor de la variable de entorno nombre
 
 heroku config:unset nombre // Para borrar nombre de las variables de entorno
+
+## Introducción a los Tokens
+
+Trabajamos con jsonwebtoken
+
+npm i jsonwebtoken
+
+Generamos un token y lo enviamos al frontend cuando un usuario se logea correctamente
+
+jwt tiene genera un token con el método sign() el cual recibe, como parametro, un objeto con el payload (información del modelo de usaurio, por ejemplo, que queremos usar), un seed o secret que es un string secreto que sirve para verificar si el token es de nuestra app y otro objeto con la clave expiresIn más un valor numerico que equivale al tiempo de duración del token
+
+## Proteger rutas mediante uso de Token - Middlewares
+
+Un token se puede recibir mediante url, pero también se puede recibir en los headers de la solicitud
+
+Normalmente se recibe con el nombre de token o Authorization y, en el backend se pasa como middleware.
+
+Cuando necesitamos pasar más de un middleware, los pasamos dentro de un array []
+
+## Variables de entorno automáticas - Postman
+
+En la pestaña test podemos capturar y setear valores
+
+con la funcion pm.environment.set('algo', 'valor de algo') puedo setear una variable y su valor
+
+Lo que se envía en la petición está en pm.response.json()
+
+El token está entonces en pm.response.json().token
+
+Con esa información, podemos creaer una variable que se actualiza dinámicamente

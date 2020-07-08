@@ -13,6 +13,7 @@ app.use(bodyParser.json())
 
 // Importamos las rutas
 app.use(require('./routes/usuario'))
+app.use(require('./routes/login'))
 
 // Seteamos 'useFindAndModify', false para poder usar algunos métodos, entre ellos findByIdAndRemove()
 mongoose.set('useFindAndModify', false)
