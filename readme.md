@@ -369,4 +369,25 @@ Lo que se envía en la petición está en pm.response.json()
 
 El token está entonces en pm.response.json().token
 
-Con esa información, podemos creaer una variable que se actualiza dinámicamente
+Con esa información, podemos creaer una variable que se actualiza dinámicamente tanto en desarrollo como en produccion
+
+## Google sign in para web
+
+Pasos y scripts
+https://developers.google.com/identity/sign-in/web/sign-in
+
+1° Crear un proyecto
+2° Vamos a https://console.developers.google.com/apis/dashboard?project=nombre-del-proyecto
+3° Vamos a la pestaña credenciales
+4° Creamos un id de cliente de OAuth
+5° Tipo de aplicación: Aplicación web
+6° Nombre cualquiera de cliente de OAuth
+7° Agregamos URI: ejemplo http://localhost
+
+Con esos pasos tendremos un id de cliente OAuth que es lo que necesitamos
+
+## Documentación automatica de nuestros servicios con Postman
+
+1° Hacemos click derecho sobre la carpeta que queremos documentar, ejemplo Curso-Node y le damos a Publish Docs. Eso abre una ventana de navegador en donde podremos publicar nuestra documentación seleccionando el environment que queremos publicar y dándole click en publicar.
+2° Obtenemos la url que genera con la documentación y listo, ya tenemos nuestra documentación.
+3° También podemos editar y, con los mismos pasos, actualizar la documentación.
