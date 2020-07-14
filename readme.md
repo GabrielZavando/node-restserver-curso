@@ -297,7 +297,7 @@ Es tan simple como pasar, como segundo parametro en la función, find() un strin
 
 Por ejemplo find({}, 'nombre email') 
 
-Y nos devolverá el id (que siempre lo envía y es bueno que así sea), el nomre y el email
+Y nos devolverá el id (que siempre lo envía y es bueno que así sea), el nombre y el email
 
 ## Borrando un documento de la base de datos
 
@@ -391,3 +391,29 @@ Con esos pasos tendremos un id de cliente OAuth que es lo que necesitamos
 1° Hacemos click derecho sobre la carpeta que queremos documentar, ejemplo Curso-Node y le damos a Publish Docs. Eso abre una ventana de navegador en donde podremos publicar nuestra documentación seleccionando el environment que queremos publicar y dándole click en publicar.
 2° Obtenemos la url que genera con la documentación y listo, ya tenemos nuestra documentación.
 3° También podemos editar y, con los mismos pasos, actualizar la documentación.
+
+## Cargar informacion de otros documentos
+
+Mongoose tiene una función llamada populate(). Esa función se pasa como parte de la serie de funciones en una busqueda (limit(), exec(), etc)
+
+pupulate() revisa que id u ObjectId existen en la busqueda realizada y permite cargar información
+
+Por ejemplo, en el modelo de categorias está referenciado el id del usuario que crea la categoria y en la función que ejecuta la peticion para listar todas las categorias añadimos:
+
+populate('usuario') // Con eso, nos muestra el objeto usuario en la respuesta. Sin eso, sólo nos devuelve el id
+
+También puedo pasar como segundo parametro, un string con las claves que quiero que devuelva (para no mostrar todo el objeto usuario) separadas por un espacio en blanco.
+
+Si tengo más referencias en un modelo, puedo pasar varias veces, una debajo de la otra, el método populate en la busqueda.
+
+EJ
+
+populate('usuario', 'nombre email')
+
+También podemos ordenar la lista que se envía en la respuesta añadiendo la función sort()
+
+sort() ordena por lo que le pasemos como parametro
+
+Ej
+
+sort('descripcion') busca la descripción y la pone en orden al fabético.

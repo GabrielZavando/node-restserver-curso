@@ -7,8 +7,8 @@
   "description": "Node trae una serie de paquetes pré instalados que se almacenan en la carpeta node_modules",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "nodemon server/server"
+    "start": "node server/index.js",
+    "dev": "nodemon server/index"
   },
   "keywords": [],
   "author": "",
