@@ -417,3 +417,32 @@ sort() ordena por lo que le pasemos como parametro
 Ej
 
 sort('descripcion') busca la descripción y la pone en orden al fabético.
+
+## Cargar archivos con fileUpload
+
+npm i express-fileupload
+
+Es un paquete externo que nos ayuda a subir archivos a nuestro proyecto
+
+El primer paso es usarlo como un middleware de la siguiente forma
+
+app.use( fileUpload({ useTempFiles: true }) );
+
+La funcion fileUpload() hace que todos los archivos que se carguen caigan dentro del objeto files que se obtiene con req.files
+
+Además, podemos asignar el nombre que debe tener la clave que nos envien por body para cargar el archivo.
+
+Ejemplo
+
+req.files.archivo
+
+De esta manera, para acceder, en el backend al archivo especifico subido, lo deben de subir dentro del body con la clave archivo y el valor será el archivo en si (una imagen, un pdf, etc)
+
+Mover el archivo
+
+Luego, para mover el archivo, existe la función mv() de este paquete.
+
+mv() recibe como parametro la url con la ubicación, nombre y extensión en la que queremos guardar dicho archivo y una funcion callback para capturar un posible error
+
+
+

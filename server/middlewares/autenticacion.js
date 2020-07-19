@@ -1,6 +1,5 @@
 
 // Verificar Token
-
 const jwt = require('jsonwebtoken')
 
 let verificaToken = (req, res, next) => {
@@ -37,11 +36,29 @@ let verificaAdminRole = (req, res, next) => {
       }
     })
   }
+}
 
- 
+// Verifica token por url
+let verificaTokenImg = (req, res, next) => {
+  let token = req.query.token
+
+  jwt.verify(token, process.env.SEED, (err, decoded) =>{
+    if (err){
+      return res.status(401).json({
+        ok: false,
+        err: {
+          message: 'Token no válido'
+        }
+      })
+    }
+     // Para devolver los datos del usuario si está verificado el token
+    req.usuario = decoded.usuario
+    next()
+  })
 }
 
 module.exports = {
   verificaToken,
-  verificaAdminRole
+  verificaAdminRole,
+  verificaTokenImg
 }
